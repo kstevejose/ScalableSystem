@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAPI Architecture Explorer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 OpenAPI Architecture Explorer</h1>
+            <p>Explore a scalable, split OpenAPI architecture designed for enterprise-grade API management. Each component is modular, reusable, and perfectly organized.</p>
+        </div>
+
+
+            <div class="tree-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search files, folders, or components...">
+                    <span class="search-icon">🔍</span>
+                </div>
+
+                <button class="expand-all-btn" id="expandAllBtn">Expand All</button>
+
+                <div class="tree" id="treeView">
+                    <ul>
+                        <li>
+                            <div class="tree-node" data-target="nexusdocs">
+                                <span class="icon folder-icon">📁</span>
+                                <span class="node-label">
+                                    Petstore APIs
+                                    <span class="badge">Root</span>
+                                </span>
+                                <span class="chevron">›</span>
+                            </div>
+                            <ul class="nested" id="nexusdocs">
+                                <li>
+                                    <div class="tree-node" data-target="split">
+                                        <span class="icon folder-icon">🎯</span>
+                                        <span class="node-label">
+                                            Split
+                                            <span class="node-description">A directory of your product where you want to split your monolthic file.</span>
+                                        </span>
+                                        <span class="chevron">›</span>
+                                    </div>
+                                    <ul class="nested" id="split">
+                                        <li>
+                                            <div class="tree-node" data-target="bsajourney">
+                                                <span class="icon folder-icon">📦</span>
+                                                <span class="node-label">Product Store</span>
+                                                <span class="node-description">The folder where you specify your Custom product docs.</span>
+                                                <span class="chevron">›</span>
+                                            </div>
+                                            <ul class="nested" id="bsajourney">
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="Store.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">Store.yaml</span>
+                                                        <span class="node-description">The custom generated API doc based on your client requirements.</span>
+                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="Store-main.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">main.yaml</span>
+                                                        <span class="node-description">The spec from which the client specific document can be created.</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="tree-node" data-target="camconsolidation">
+                                                <span class="icon folder-icon">📦</span>
+                                                <span class="node-label">Product User</span>
+                                                <span class="node-description">The folder where you specify your Custom product docs.</span>
+                                                <span class="chevron">›</span>
+                                            </div>
+                                            <ul class="nested" id="camconsolidation">
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="Users.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">User.yaml</span>
+                                                        <span class="node-description">The custom generated API doc based on your client requirements.</span>
+                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="user-main.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">main.yaml</span>
+                                                        <span class="node-description">The spec from which the client specific document can be created.</span>
+                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                       
+                                        
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="tree-node" data-target="components">
+                                        <span class="icon component-icon">🧩</span>
+                                        <span class="node-label">
+                                            components
+                                            <span class="node-description">Reusable OpenAPI components</span>
+                                        </span>
+                                        <span class="chevron">›</span>
+                                    </div>
+                                    <ul class="nested" id="components">
+                                        <li>
+                                            <div class="tree-node" data-target="examples">
+                                                <span class="icon folder-icon">💡</span>
+                                                <span class="node-label">examples</span>
+                                                <span class="chevron">›</span>
+                                            </div>
+                                            <ul class="nested" id="examples">
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="CatToyProduct.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">CatToyProduct.yaml</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="DogFoodProduct.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">DogFoodProduct.yaml</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="SampleRequest.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">...</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="tree-node" data-target="parameters">
+                                                <span class="icon folder-icon">⚙️</span>
+                                                <span class="node-label">parameters</span>
+                                                <span class="chevron">›</span>
+                                            </div>
+                                            <ul class="nested" id="parameters">
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="Category.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">Category.yaml</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="InStock.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">InStock.yaml</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="SampleParameter.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">...</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="tree-node" data-target="schemas">
+                                                <span class="icon folder-icon">🗂️</span>
+                                                <span class="node-label">
+                                                    schemas
+                                                    <span class="node-description">Data models</span>
+                                                </span>
+                                                <span class="chevron">›</span>
+                                            </div>
+                                            <ul class="nested" id="schemas">
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="Address.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">Address.yaml</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tree-node file-node" data-file="Cart.yaml">
+                                                        <span class="icon file-icon">📄</span>
+                                                        <span class="node-label">Cart.yaml</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="tree-node" data-target="paths">
+                                        <span class="icon component-icon">🛣️</span>
+                                        <span class="node-label">
+                                            paths
+                                            <span class="node-description">API endpoints</span>
+                                        </span>
+                                        <span class="chevron">›</span>
+                                    </div>
+                                    <ul class="nested" id="paths">
+                                        <li>
+                                            <div class="tree-node file-node" data-file="products_{productId}.yaml">
+                                                <span class="icon file-icon">📄</span>
+                                                <span class="node-label">products_{productId}.yaml</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tree-node file-node" data-file="path-users.yaml">
+                                                <span class="icon file-icon">📄</span>
+                                                <span class="node-label">users.yaml</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tree-node">
+                                                <span class="icon file-icon">📄</span>
+                                                <span class="node-label">
+                                                    ...
+                                                    <span class="node-description">each file is one path</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="tree-node file-node" data-file="info.yaml">
+                                        <span class="icon file-icon">ℹ️</span>
+                                        <span class="node-label">
+                                            info.yaml
+                                            <span class="node-description">API title, version, description</span>
+                                        </span>
+                                    </div>
+                                </li>
+                                 <li>
+                                    <div class="tree-node file-node" data-file="servers.yaml">
+                                        <span class="icon file-icon">ℹ️</span>
+                                        <span class="node-label">
+                                            servers.yaml
+                                            <span class="node-description">BaseURL details</span>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="tree-node file-node" data-file="openapi.yaml">
+                                        <span class="icon file-icon">⭐</span>
+                                        <span class="node-label">
+                                            openapi.yaml
+                                            <span class="node-description">The source file that will be split into multiple files.</span>
+                                            <span class="badge">Main</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-panel" id="contentPanel">
+        <div class="content-header">
+            <h2 id="panelTitle">File Content</h2>
+            <p id="panelSubtitle">View the structure and content</p>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+        <div class="content-body" id="contentBody">
+            </div>
+    </div>
+    <script src="js/script.js" defer></script>
+</body>
+</html>
