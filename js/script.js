@@ -1005,8 +1005,8 @@ post:
 `
             },
 
-            'Store.yaml': {
-                description: 'Content for Store.yaml',
+            'store-journey.yaml': {
+                description: 'Content for dist/store-journey.yaml',
                 content: `openapi: 3.0.3
 info:
   title: PetStore API
@@ -1397,8 +1397,8 @@ components:
           - vitamins
 `
             },
-            'Store-main.yaml': {
-                description: 'Content for Store/main.yaml',
+            'stores.yaml': {
+                description: 'Content for Products/Store.yaml',
                 content: `openapi: 3.0.3
 info:
   $ref: '../info.yaml'
@@ -1412,8 +1412,8 @@ paths:
   /products/{productId}:
     $ref: ../paths/products_{productId}.yaml`
             },
-            'Users.yaml': {
-                description: 'Content for Users.yaml',
+            'users.yaml': {
+                description: 'Content for Products/User.yaml',
                 content: `openapi: 3.0.3
 info:
   $ref: '../info.yaml'
@@ -1427,8 +1427,8 @@ paths:
   /products/{productId}:
     $ref: ../paths/users_{userId}_cart.yaml`
             },
-            'user-main.yaml': {
-                description: 'Content for User/main.yaml',
+            'user-journey.yaml': {
+                description: 'Content for dist/user-journey.yaml',
                 content: `openapi: 3.0.3
 info:
   title: PetStore API
@@ -1949,9 +1949,15 @@ schema:
                     contentBody.innerHTML = `
                         <div class="info-section">
                             <h3>🚀 Purpose</h3>
-                            <p>${fileData.description}</p>
-                            ${fileName === 'openapi.yaml' ? '<p>This file acts as the "brain" of the operation, using <strong>$ref</strong> to link all the other modular files into one cohesive API specification.</p>' : ''}
-                            ${fileName.includes('yaml') && !fileName.includes('openapi.yaml') ? '<p>These are the contents of your split <strong>API files.</strong>. You only reference the path in your custom API Docs where the file is actually located. This is the core principle of a scalable, "DRY" (Don\'t Repeat Yourself) architecture.</p>' : ''}
+                            ${fileName === 'store-journey.yaml' || fileName === 'user-journey.yaml' ? 
+                                `<p>These are the contents of the ${fileName === 'store-journey.yaml' ? 'Store' : 'User'} API specification that you defined inside the Products folder.</p>
+                                <p>This serves as the bundled output, essentially a custom API documentation generated from your master list.</p>
+                                <p>It represents a tailored subset of endpoints specifically focused on ${fileName === 'store-journey.yaml' ? 'store operations' : 'user management'}, making it easier for clients to understand and implement ${fileName === 'store-journey.yaml' ? 'store-related' : 'user-related'} functionality.</p>`
+                                :
+                                `<p>${fileData.description}</p>
+                                ${fileName === 'openapi.yaml' ? '<p>This file acts as the "brain" of the operation, using <strong>$ref</strong> to link all the other modular files into one cohesive API specification.</p>' : ''}
+                                ${fileName.includes('yaml') && !fileName.includes('openapi.yaml') ? '<p>These are the contents of your split <strong>API files</strong>. You only reference the path in your custom API Docs where the file is actually located. This is the core principle of a scalable, "DRY" (Don\'t Repeat Yourself) architecture.</p>' : ''}`
+                            }
                         </div>
                         <div class="code-block">
                             <div class="code-header">
