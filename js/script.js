@@ -769,7 +769,7 @@ value:
                 `
             },
             'Category.yaml': {
-                description: 'A reusable parameter, defined once and referenced anywhere.',
+                description: 'components/parameters/Category.yaml',
                 content: `
 name: category
 in: query
@@ -807,7 +807,7 @@ required:
                 `
             },
             'products_{productId}.yaml': {
-                description: 'API endpoints for single product operations (get by ID, update, delete)',
+                description: 'paths/products_{productId}.yaml',
                 content: `get:
   tags:
     - Products
@@ -875,7 +875,7 @@ delete:
 `
             },
             'Address.yaml': {
-                description: 'Schema for postal addresses used by users.',
+                description: 'components/schemas/Address.yaml',
                 content: `
 type: object
 properties:
@@ -898,7 +898,7 @@ properties:
                 `
             },
             'Cart.yaml': {
-                description: 'Schema for a user shopping cart.',
+                description: 'components/schemas/Cart.yaml',
                 content: `
 type: object
 properties:
@@ -1754,7 +1754,7 @@ components:
 `
             },
             'InStock.yaml': {
-                description: 'A reusable parameter for OAuth grant type.',
+                description: 'components/parameters/InStock.yaml',
                 content: `
 name: inStock
 in: query
@@ -1771,7 +1771,7 @@ example: true
                 content: '# This main.yaml might aggregate other partial schemas.\nref: ./documentCollection.yaml'
             },
             'path-users.yaml': {
-                description: 'A single path file for creating a new organization.',
+                description: 'paths/users.yaml.',
                 content: `
 post:
   tags:
@@ -1828,7 +1828,6 @@ schema:
         // --- Main Script ---
         document.addEventListener('DOMContentLoaded', function() {
             const treeNodes = document.querySelectorAll('.tree-node[data-target]');
-            const searchInput = document.getElementById('searchInput');
             const expandAllBtn = document.getElementById('expandAllBtn');
             let allExpanded = false;
             
@@ -1854,6 +1853,11 @@ schema:
                     const targetId = this.getAttribute('data-target');
                     const targetList = document.getElementById(targetId);
                     
+                  
+                    if (targetId && !this.classList.contains('file-node') && panel.classList.contains('active')) {
+                        hidePanel();
+                    }
+                    
                     if (targetList) {
                         this.classList.toggle('expanded');
                         targetList.classList.toggle('active');
@@ -1861,46 +1865,8 @@ schema:
                 });
             });
 
-            // Search functionality
-            searchInput.addEventListener('input', function() {
-                // (Your existing search logic works great)
-                const searchTerm = this.value.toLowerCase();
-                const allNodes = document.querySelectorAll('.tree-node');
-                
-                allNodes.forEach(node => {
-                    const text = node.textContent.toLowerCase();
-                    node.classList.remove('highlight');
-                    
-                    if (searchTerm && text.includes(searchTerm)) {
-                        node.classList.add('highlight');
-                        
-                        let parent = node.parentElement;
-                        while (parent) {
-                            if (parent.classList.contains('nested')) {
-                                parent.classList.add('active');
-                                const parentNode = parent.previousElementSibling;
-                                if (parentNode && parentNode.classList.contains('tree-node')) {
-                                    parentNode.classList.add('expanded');
-                                }
-                            }
-                            parent = parent.parentElement;
-                        }
-                    }
-                });
-
-                if (!searchTerm) {
-                    document.querySelectorAll('.nested').forEach(nested => {
-                        nested.classList.remove('active');
-                    });
-                    document.querySelectorAll('.tree-node').forEach(node => {
-                        node.classList.remove('expanded');
-                    });
-                }
-            });
-
-            // Expand/Collapse All
+           
             expandAllBtn.addEventListener('click', function() {
-                // (Your existing expand-all logic)
                 allExpanded = !allExpanded;
                 
                 if (allExpanded) {
@@ -1911,6 +1877,8 @@ schema:
                         node.classList.add('expanded');
                     });
                     this.textContent = 'Collapse All';
+                    this.classList.add('expanded-state');
+                    this.classList.remove('collapsed-state');
                 } else {
                     document.querySelectorAll('.nested').forEach(nested => {
                         nested.classList.remove('active');
@@ -1919,12 +1887,16 @@ schema:
                         node.classList.remove('expanded');
                     });
                     this.textContent = 'Expand All';
+                    this.classList.add('collapsed-state');
+                    this.classList.remove('expanded-state');
                 }
             });
+           
+            expandAllBtn.classList.add('collapsed-state');
 
-            // Animate stats on hover
+  
             document.querySelectorAll('.stat-card').forEach(card => {
-                // (Your existing stat card logic)
+            
                 card.addEventListener('mouseenter', function() {
                     const number = this.querySelector('.number');
                     number.style.transform = 'scale(1.1)';
@@ -1946,6 +1918,12 @@ schema:
                     const formattedCode = formatYaml(fileData.content);
                     
                     // Build the inner HTML for the panel
+                    // Note: Description is already shown in the subtitle, so we don't repeat it here to avoid duplication
+                    const isExampleFile = fileName.includes('Product.yaml') || fileName === 'SampleRequest.yaml' || fileName.includes('Example');
+                    const isParameterFile = fileName === 'Category.yaml' || fileName === 'InStock.yaml' || fileName === 'SampleParameter.yaml';
+                    const isSchemaFile = fileName === 'Address.yaml' || fileName === 'Cart.yaml';
+                    const isYamlFile = fileName.includes('.yaml') || fileName.includes('.yml');
+                    
                     contentBody.innerHTML = `
                         <div class="info-section">
                             <h3>🚀 Purpose</h3>
@@ -1954,9 +1932,24 @@ schema:
                                 <p>This serves as the bundled output, essentially a custom API documentation generated from your master list.</p>
                                 <p>It represents a tailored subset of endpoints specifically focused on ${fileName === 'store-journey.yaml' ? 'store operations' : 'user management'}, making it easier for clients to understand and implement ${fileName === 'store-journey.yaml' ? 'store-related' : 'user-related'} functionality.</p>`
                                 :
-                                `<p>${fileData.description}</p>
-                                ${fileName === 'openapi.yaml' ? '<p>This file acts as the "brain" of the operation, using <strong>$ref</strong> to link all the other modular files into one cohesive API specification.</p>' : ''}
-                                ${fileName.includes('yaml') && !fileName.includes('openapi.yaml') ? '<p>These are the contents of your split <strong>API files</strong>. You only reference the path in your custom API Docs where the file is actually located. This is the core principle of a scalable, "DRY" (Don\'t Repeat Yourself) architecture.</p>' : ''}`
+                                isSchemaFile ?
+                                    `<p>Here, you define the schema of the request and response payload.</p>
+                                     <p> You only reference the path in your custom API Docs where the file is actually located. This is the core principle of a scalable, "DRY" (Don't Repeat Yourself) architecture.</p>`
+                                    
+                                    :
+                                    isParameterFile ?
+                                        `<p>Here, you define the query parameter details. You only reference the query parameter path in your custom API Docs where the file is actually located. This is the core principle of a scalable, "DRY" (Don't Repeat Yourself) architecture.</p>`
+                                        :
+                                        // isPathfile?
+                                        // ` <p> You only reference the path in your custom API Docs where the file is actually located. This is the core principle of a scalable, "DRY" (Don't Repeat Yourself) architecture.</p>`
+                                        // :
+                                        isExampleFile ?
+                                            `<p>This is an example file that contains the actual json content that gets rendered in the API Docs. These examples help developers understand the expected format and structure of the API.</p>
+                                            <p> You only reference the path in your custom API Docs where the file is actually located. This is the core principle of a scalable, "DRY" (Don't Repeat Yourself) architecture.</p>`
+                                            :
+                                            `${fileName === 'openapi.yaml' ? '<p>This file acts as the "brain" of the operation, using <strong>$ref</strong> to link all the other modular files into one cohesive API specification.</p>' : ''}
+                                            ${isYamlFile && fileName !== 'openapi.yaml' && !isExampleFile && !isParameterFile && !isSchemaFile ? '<p>These are the contents of your split <strong>API files</strong>. You only reference the path in your custom API Docs where the file is actually located. This is the core principle of a scalable, "DRY" (Don\'t Repeat Yourself) architecture.</p>' : ''}
+                                            ${!isYamlFile ? `<p>${fileData.description}</p>` : ''}`
                             }
                         </div>
                         <div class="code-block">
