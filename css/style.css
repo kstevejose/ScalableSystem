@@ -120,36 +120,6 @@
             position: relative;
         }
 
-        .search-box {
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 18px 50px 18px 24px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            font-size: 1.2rem;
-        }
-
         .tree {
             position: relative;
         }
@@ -298,22 +268,44 @@
         }
 
         .expand-all-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 14px 32px;
+            padding: 16px 36px;
             border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .expand-all-btn:hover {
+        /* Collapsed state - Green/Teal color */
+        .expand-all-btn.collapsed-state {
+            background: linear-gradient(135deg, #2a9d8f, #06d6a0);
+            box-shadow: 0 4px 15px rgba(42, 157, 143, 0.5);
+        }
+
+        .expand-all-btn.collapsed-state:hover {
+            background: linear-gradient(135deg, #238a7a, #05c48f);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 6px 20px rgba(42, 157, 143, 0.6);
+        }
+
+        /* Expanded state - Red/Orange color */
+        .expand-all-btn.expanded-state {
+            background: linear-gradient(135deg, #e63946, #f77f00);
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.5);
+        }
+
+        .expand-all-btn.expanded-state:hover {
+            background: linear-gradient(135deg, #d62839, #e67700);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.6);
         }
 
         .expand-all-btn:active {
