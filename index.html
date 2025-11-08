@@ -15,11 +15,6 @@
 
 
             <div class="tree-container">
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Search files, folders, or components...">
-                    <span class="search-icon">🔍</span>
-                </div>
-
                 <button class="expand-all-btn" id="expandAllBtn">Expand All</button>
 
                 <div class="tree" id="treeView">
@@ -101,6 +96,7 @@
                                             <div class="tree-node" data-target="examples">
                                                 <span class="icon folder-icon">💡</span>
                                                 <span class="node-label">examples</span>
+                                                <span class="node-description">Reusable examples of your request and response bodies</span>
                                                 <span class="chevron">›</span>
                                             </div>
                                             <ul class="nested" id="examples">
@@ -128,6 +124,7 @@
                                             <div class="tree-node" data-target="parameters">
                                                 <span class="icon folder-icon">⚙️</span>
                                                 <span class="node-label">parameters</span>
+                                                <span class="node-description">Reusable query parameters are specified here.</span>
                                                 <span class="chevron">›</span>
                                             </div>
                                             <ul class="nested" id="parameters">
@@ -215,7 +212,7 @@
                                         <span class="icon component-icon">📌</span>
                                         <span class="node-label">
                                             common
-                                            <span class="node-description">Common OpenAPI configurations</span>
+                                            <span class="node-description">Servers, Info, tags .yaml files are specified here. </span>
                                         </span>
                                         <span class="chevron">›</span>
                                     </div>
